@@ -17,7 +17,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (terraform-mode cmake-mode irony go-add-tags linum-off go-guru go-rename go-mode))))
+    (yaml-mode toml-mode rust-mode terraform-mode cmake-mode irony go-add-tags linum-off go-guru go-rename go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
