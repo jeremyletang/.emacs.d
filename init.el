@@ -25,6 +25,10 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; backup files
+(setq backup-directory-alist `(("." . "~/.emacs.d/.backup")))
+(setq backup-by-copying t)
+
 ;; disable linum for a given list of major modes
 (require 'linum-off)
 
@@ -114,20 +118,18 @@
 ;; =============
 (add-hook 'irony-mode-hook 'irony-eldoc)
 
-;;(setq irony-libclang-additional-flags
-;;      '("-isystem" "/usr/local/opt/llvm/include/c++/v1/"))
-;;(setq irony-libclang-additional-flags
-;;      (append '("-I" "/usr/local/opt/llvm/include/c++/v1/") irony-libclang-additional-flags))
-;;/Library/Developer/CommandLineTools/usr/include/c++/v1/
-(setq irony-libclang-additional-flags
+(setq irony-additional-clang-options
       '("-isystem" "/usr/local/Cellar/llvm/7.0.0/include/c++/v1"))
-(setq irony-libclang-additional-flags
-      (append '("-I" "/usr/local/Cellar/llvm/7.0.0/include/c++/v1") irony-libclang-additional-flags))
-;;(setq irony-libclang-additional-flags
- ;;     (append '("-I" "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/") irony-libclang-additional-flags))
-;;(setq irony-libclang-additional-flags
-;;      (append '("-isystem" "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/") irony-libclang-additional-flags))
-(setq irony-additional-clang-options '("-std=c++17"))
+(setq irony-additional-clang-options
+      (append '("-I" "/usr/local/Cellar/llvm/7.0.0/include/c++/v1") irony-additional-clang-options))
+(setq irony-additional-clang-options
+      (append '("-I" "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include") irony-additional-clang-options))
+(setq irony-additional-clang-options
+      (append '("-std=c++17") irony-additional-clang-options))
+
+;; project specific includes
+(setq irony-additional-clang-options
+      (append '("-I" "/Users/jeremy/work/cpp/elk/") irony-additional-clang-options))
 
 ;; ==========================================
 ;; (optional) bind TAB for indent-or-complete
