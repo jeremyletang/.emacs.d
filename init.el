@@ -76,6 +76,11 @@
 
 (add-hook 'go-mode-hook 'gomode-on-save-hook)
 
+(require 'go-autocomplete)
+(require 'auto-complete-config)
+(ac-config-default)
+(add-hook 'completion-at-point-functions 'go-complete-at-point)
+
 ;; c++ autocompletion
 
 ;; =============
