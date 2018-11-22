@@ -70,7 +70,7 @@
   ;; custom compile
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
-	   "go generate && go build -v && go test -v && go vet"))
+	   "CGO_ENABLED=0 go generate && CGO_ENABLED=0 go build -v && CGO_ENABLED=0 go test -v && CGO_ENABLED=0 go vet"))
 
   )
 
@@ -79,7 +79,7 @@
 (require 'go-autocomplete)
 (require 'auto-complete-config)
 (ac-config-default)
-(add-hook 'completion-at-point-functions 'go-complete-at-point)
+;;(add-hook 'completion-at-point-functions 'go-complete-at-point)
 
 ;; c++ autocompletion
 
@@ -161,3 +161,12 @@
   (local-set-key (kbd "TAB") 'irony--indent-or-complete)
   (local-set-key [tab] 'irony--indent-or-complete))
 (add-hook 'c-mode-common-hook 'irony-mode-keys)
+
+(load "/usr/local/Cellar/llvm/7.0.0/share/clang/clang-format.el")
+
+
+(defun c++-mode-on-save-hook ()
+  (add-hook 'before-save-hook 'clang-format-buffer)
+  )
+
+(add-hook 'c++-mode-hook 'c++-mode-on-save-hook)
